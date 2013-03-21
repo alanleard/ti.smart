@@ -21,7 +21,7 @@ ignoreFiles = ['.DS_Store','.cvsignore','.gitignore']
 ignoreDirs = ['.svn','_svn','.git','CVS','CVSROOT','sdk','oauth', 'lib']
 
 moduleFiles = [
-    'lib/smart.js'
+    'lib/TeamworkPM.js'
 ]
 
 required_manifest_keys = ['name','version','moduleid','description','copyright','license','copyright','platform','minsdk']
