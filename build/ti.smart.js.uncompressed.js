@@ -232,8 +232,7 @@ var smartApi = (function() {
     };
     var showSmartappVersion = function(params){
         if (params && params.id && params.versions_id){
-            params.url = urls.showSmartappVersion.replace('{id}',params.id);
-            url.replace("{alt_id}",params.versions_id)
+            params.url = urls.showSmartappVersion.replace('{id}',params.id).replace("{alt_id}",params.versions_id);
             fetch(params);
         }
     };
@@ -289,8 +288,7 @@ var smartApi = (function() {
     };
     var showLocationMode = function(params){
         if (params && params.id && params.mode_id){
-            params.url = urls.showLocationMode.replace('{id}',params.id);
-            params.url.replace("{alt_id}", params.mode_id);
+            params.url = urls.showLocationMode.replace('{id}',params.id).replace("{alt_id}", params.mode_id);
             fetch(params);
         }
     };
@@ -302,8 +300,7 @@ var smartApi = (function() {
     };
     var sendLocationModeChange = function(params){
         if (params && params.id && params.modeChanges_id){
-            params.url = urls.sendLocationModeChange.replace('{id}',params.id);
-            params.url.replace("{alt_id}", params.modeChanges_id)
+            params.url = urls.sendLocationModeChange.replace('{id}',params.id).replace("{alt_id}", params.modeChanges_id);
             fetch(params);
         }
     };
@@ -400,8 +397,7 @@ var smartApi = (function() {
     };
     var showGroupDevice = function(params){
         if (params && params.id && params.device_id){
-            params.url = urls.showGroupDevice.replace('{id}',params.id);
-            params.url.replace("{alt_id}",params.device_id);
+            params.url = urls.showGroupDevice.replace('{id}',params.id).replace("{alt_id}",params.device_id);
             fetch(params);
         }
     };
@@ -444,8 +440,7 @@ var smartApi = (function() {
     };
     var showDeviceStateOverride = function(params){
         if (params && params.id && params.stateOverrides_id) {
-            params.url = urls.showDeviceStateOverride.replace('{id}',params.id);
-            params.url.replace("{alt_id}",params.stateOverrides_id)
+            params.url = urls.showDeviceStateOverride.replace('{id}',params.id).replace("{alt_id}",params.stateOverrides_id);
             fetch(params);
         }
     };
