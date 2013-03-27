@@ -1,0 +1,619 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=macintosh">
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 14">
+<link rel=File-List href="Ti.SmartDocs_files/filelist.xml">
+<style>
+<!--table
+	{mso-displayed-decimal-separator:"\.";
+	mso-displayed-thousand-separator:"\,";}
+@page
+	{margin:1.0in .75in 1.0in .75in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;}
+.style0
+	{mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	white-space:nowrap;
+	mso-rotate:0;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	color:black;
+	font-size:12.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:Calibri, sans-serif;
+	mso-font-charset:0;
+	border:none;
+	mso-protection:locked visible;
+	mso-style-name:Normal;
+	mso-style-id:0;}
+td
+	{mso-style-parent:style0;
+	padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	mso-ignore:padding;
+	color:black;
+	font-size:12.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:Calibri, sans-serif;
+	mso-font-charset:0;
+	mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	border:none;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	mso-protection:locked visible;
+	white-space:nowrap;
+	mso-rotate:0;}
+.xl65
+	{mso-style-parent:style0;
+	font-weight:700;}
+-->
+</style>
+</head>
+
+<body link=blue vlink=purple>
+
+<table border=0 cellpadding=0 cellspacing=0 width=918 style='border-collapse:
+ collapse;table-layout:fixed;width:918pt'>
+ <col width=167 style='mso-width-source:userset;mso-width-alt:7125;width:167pt'>
+ <col width=126 style='mso-width-source:userset;mso-width-alt:5376;width:126pt'>
+ <col width=143 style='mso-width-source:userset;mso-width-alt:6101;width:143pt'>
+ <col width=482 style='mso-width-source:userset;mso-width-alt:20565;width:482pt'>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 colspan=4 width=918 style='height:15.0pt;mso-ignore:colspan;
+  width:918pt'>For response data definitions visit:
+  https://docs.google.com/a/222wine.com/document/d/1dAoqlmv2EVcbrZsjKV2ksMxNpjV5GNLxzqN6lBxi_UE</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 colspan=4 style='height:15.0pt;mso-ignore:colspan'></td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 colspan=3 style='height:15.0pt;mso-ignore:colspan'>Create a
+  SmartThings Developer account here: http://graph.api.smartthings.com/</td>
+  <td></td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 colspan=4 style='height:15.0pt;mso-ignore:colspan'></td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 class=xl65 style='height:15.0pt'>Parameter Definitions</td>
+  <td colspan=3 style='mso-ignore:colspan'></td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>id</td>
+  <td colspan=2 style='mso-ignore:colspan'>The primary API required id</td>
+  <td></td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>alt_id</td>
+  <td colspan=2 style='mso-ignore:colspan'>The second required id (example: hub
+  &amp; device)</td>
+  <td></td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>body</td>
+  <td colspan=2 style='mso-ignore:colspan'>JSON formatted body to send with a
+  POST</td>
+  <td></td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>type</td>
+  <td colspan=3 style='mso-ignore:colspan'>The type of API call
+  (GET,POST,PUT,DELETE).<span style="mso-spacerun:yes">&nbsp; </span>Currently
+  can only be used to override GET.</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>onload</td>
+  <td colspan=2 style='mso-ignore:colspan'>The onload callback function.</td>
+  <td></td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>onerror</td>
+  <td colspan=2 style='mso-ignore:colspan'>The onerror callback function.</td>
+  <td></td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 colspan=4 style='height:15.0pt;mso-ignore:colspan'></td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 class=xl65 style='height:15.0pt'>Function</td>
+  <td class=xl65>Required Parameters</td>
+  <td class=xl65>Optional Parameters</td>
+  <td class=xl65>Example</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getEvents<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getEvents ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showSmartappInstallation<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showSmartappInstallation ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getSmartappInstallations<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>getSmartappInstallations ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showSmartappEditable<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showSmartappEditable ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getSmartappEditable<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>getSmartappEditable ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showSmartappApprovalRequest<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showSmartappApprovalRequest ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getSmartappApprovalRequests<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>getSmartappApprovalRequests ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showSmartappVersion<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id,alt_id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showSmartappVersion
+  ({id:'some_id',alt_it:'secondary_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getSmartappVersions<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getSmartappVersions ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showSmartapp<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showSmartapp ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getSmartapps<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>getSmartapps ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showSmartappCategory<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showSmartappCategory ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getSmartappCategories<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>getSmartappCategories ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showLocationOrder<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>showLocationOrder ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getLocationImages<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>getLocationImages ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showLocationDeviceOrder<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>showLocationDeviceOrder ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getLocationSmartapps<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getLocationSmartapps ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getLocationRoles<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getLocationRoles ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showLocationMode<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id,alt_id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showLocationMode
+  ({id:'some_id',alt_it:'secondary_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getLocationModes<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getLocationModes ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>sendLocationModeChange<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id,alt_id</td>
+  <td>onload,onerror,body,type</td>
+  <td>sendLocationModeChange
+  ({id:'some_id',alt_it:'secondary_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>postHubClaim<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>postHubClaim ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getLocationHubs<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getLocationHubs ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getLocationGroups<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getLocationGroups ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getLocationEvents<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getLocationEvents ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getLocationDevices<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getLocationDevices ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showLocation<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showLocation ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getLocations<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>getLocations ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getHubRoles<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getHubRoles ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getHubEvents<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getHubEvents ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getHubDevices<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getHubDevices ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>sendHubCommand<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>sendHubCommand ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showHub<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showHub ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getHubs<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>getHubs ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getGroupRoles<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getGroupRoles ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getGroupEvents<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getGroupEvents ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showGroupDevice<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id,alt_id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showGroupDevice
+  ({id:'some_id',alt_it:'secondary_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getGroupDevices<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getGroupDevices ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showGroup<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showGroup ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getGroups<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>getGroups ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showDeviceType<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showDeviceType ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getDeviceTypes<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>getDeviceTypes ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showDeviceIcon<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showDeviceIcon ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getDeviceIcons<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>getDeviceIcons ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showDeviceStateOverride<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id,alt_id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showDeviceStateOverride
+  ({id:'some_id',alt_it:'secondary_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getDeviceStateOverrides<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getDeviceStateOverrides ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getDeviceRoles<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getDeviceRoles ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getDeviceEvents<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getDeviceEvents ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>sendDeviceCommand<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>sendDeviceCommand ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showDevice<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showDevice ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getDevices<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>getDevices ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showClient<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showClient ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getRoles<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>getRoles ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>showAccount<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>showAccount ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>getAccounts<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>getAccounts ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>createAccount<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>createAccount ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>addDevice<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>addDevice ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>removeDevice<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>removeDevice ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>createGroup<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>createGroup ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>createClient<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>createClient ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>createHub<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>createHub ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>postHubsManufactured<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>postHubsManufactured ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>createLocation<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>createLocation ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>createLocationMode<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>createLocationMode ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>addLocationSmartApp<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td>id</td>
+  <td>onload,onerror,body,type</td>
+  <td>addLocationSmartApp ({id:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>installSmartApp<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>installSmartApp ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>createSmartApp<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>createSmartApp ({:'some_id',onload:someFunction});</td>
+ </tr>
+ <tr height=15 style='height:15.0pt'>
+  <td height=15 style='height:15.0pt'>createApprovalRequest<span
+  style="mso-spacerun:yes">&nbsp;</span></td>
+  <td></td>
+  <td>onload,onerror,body,type</td>
+  <td>createApprovalRequest ({:'some_id',onload:someFunction});</td>
+ </tr>
+</table>
+
+</body>
+
+</html>
