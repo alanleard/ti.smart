@@ -7,83 +7,109 @@ var smartApi = (function() {
     // +-----------------------+
 
     var urlRoot = 'https://graph.api.smartthings.com/api/';
-
-    var urls = {
-            getEvents : urlRoot + 'smartapps/installations/{id}/events/',
-            showSmartappInstallation : urlRoot + 'smartapps/installations/{id}/',
-            getSmartappInstallations : urlRoot + 'smartapps/installations/',
-            showSmartappEditable : urlRoot + 'smartapps/editable/{id}/',
-            getSmartappEditable : urlRoot + 'smartapps/editable/',
-            showSmartappApprovalRequest : urlRoot + 'smartapps/approvalrequests/{id}/',
-            getSmartappApprovalRequests : urlRoot + 'smartapps/approvalrequests/',
-            showSmartappVersion : urlRoot + 'smartapps/{id}/versions/{alt_id}/',
-            getSmartappVersions : urlRoot + 'smartapps/{id}/versions',
-            showSmartapp : urlRoot + 'smartapps/{id}',
-            getSmartapps : urlRoot + 'smartapps',
-            showSmartappCategory : urlRoot + 'smartappcategories/{id}',
-            getSmartappCategories : urlRoot + 'smartappcategories',
-            showLocationOrder : urlRoot + 'locations/order',
-            getLocationImages : urlRoot + 'locations/images',
-            showLocationDeviceOrder : urlRoot + 'locations/devices/order',
-            getLocationSmartapps : urlRoot + 'locations/{id}/smartapps',
-            getLocationRoles : urlRoot + 'locations/{id}/roles',
-            showLocationMode : urlRoot + 'locations/{id}/modes/{alt_id}',
-            getLocationModes : urlRoot + 'locations/{id}/modes',
-            sendLocationModeChange : urlRoot + 'locations/{id}/modeChanges/{alt_id}',
-            postHubClaim : urlRoot + 'locations/{id}/hubs/claim',
-            getLocationHubs : urlRoot + 'locations/{id}/hubs',
-            getLocationGroups : urlRoot + 'locations/{id}/groups',
-            getLocationEvents : urlRoot + 'locations/{id}/events',
-            getLocationDevices : urlRoot + 'locations/{id}/devices',
-            showLocation : urlRoot + 'locations/{id}',
-            getLocations : urlRoot + 'locations',
-            getHubRoles : urlRoot + 'hubs/{id}/roles',
-            getHubEvents : urlRoot + 'hubs/{id}/events',
-            getHubDevices : urlRoot + 'hubs/{id}/devices',
-            sendHubCommand : urlRoot + 'hubs/{id}/command/',
-            showHub : urlRoot + 'hubs/{id}',
-            getHubs : urlRoot + 'hubs',
-            getGroupRoles : urlRoot + 'groups/{id}/roles',
-            getGroupEvents : urlRoot + 'groups/{id}/events',
-            showGroupDevice : urlRoot + 'groups/{id}/devices/{alt_id}',
-            getGroupDevices : urlRoot + 'groups/{id}/devices',
-            showGroup : urlRoot + 'groups/{id}',
-            getGroups : urlRoot + 'groups',
-            showDeviceType : urlRoot + 'devicetypes/{id}',
-            getDeviceTypes : urlRoot + 'devicetypes/',
-            showDeviceIcon : urlRoot + 'devices/icons/{id}',
-            getDeviceIcons : urlRoot + 'devices/icons',
-            showDeviceStateOverride : urlRoot + 'devices/{id}/stateOverrides/{alt_id}',
-            getDeviceStateOverrides : urlRoot + 'devices/{id}/stateOverrides',
-            getDeviceRoles : urlRoot + 'devices/{id}/roles',
-            getDeviceEvents : urlRoot + 'devices/{id}/events',
-            sendDeviceCommand : urlRoot + 'devices/{id}/commands/',
-            showDevice : urlRoot + 'devices/{id}',
-            getDevices : urlRoot + 'devices',
-            showClient : urlRoot + 'clients/{id}',
-            getRoles : urlRoot + 'accounts/{id}/roles',
-            showAccount : urlRoot + 'accounts/{id}',
-            getAccounts : urlRoot + 'accounts',
-            createAccount : urlRoot + 'accounts',//POST
-            addDevice : urlRoot + 'groups/{id}/devices',//POST
-            removeDevice : urlRoot + 'groups/{id}/devices',//DELETE
-            createGroup : urlRoot + 'groups',//POST
-            createClient : urlRoot + 'clients',//POST
-            createHub : urlRoot + 'hubs',//POST
-            postHubsManufactured : urlRoot + 'hubs/manufactured',//POST
-            createLocation : urlRoot + 'locations',//POST
-            createLocationMode : urlRoot + 'locations/{id}/modes',//POST
-            addLocationSmartApp : urlRoot + 'locations/{id}/smartapps',//POST
-            installSmartApp : urlRoot + 'smartapps/installations',//POST
-            createSmartApp : urlRoot + 'smartapps',//POST
-            createApprovalRequest : urlRoot + 'smartapps/approvalrequests' //POST
+    var publicMethods = {};
+    var logLevel = 'debug';
+     
+    var API = {
+            getEvents : {url:'smartapps/installations/{id}/events/',type:'GET'},
+            showSmartappInstallation : {url:'smartapps/installations/{id}/',type:'GET'},
+            getSmartappInstallations : {url:'smartapps/installations/',type:'GET'},
+            showSmartappEditable : {url:'smartapps/editable/{id}/',type:'GET'},
+            getSmartappEditable : {url:'smartapps/editable/',type:'GET'},
+            showSmartappApprovalRequest : {url:'smartapps/approvalrequests/{id}/',type:'GET'},
+            getSmartappApprovalRequests : {url:'smartapps/approvalrequests/',type:'GET'},
+            showSmartappVersion : {url:'smartapps/{id}/versions/{alt_id}/',type:'GET'},
+            getSmartappVersions : {url:'smartapps/{id}/versions/',type:'GET'},
+            showSmartapp : {url:'smartapps/{id}/',type:'GET'},
+            getSmartapps : {url:'smartapps/',type:'GET'},
+            showSmartappCategory : {url:'smartappcategories/{id}/',type:'GET'},
+            getSmartappCategories : {url:'smartappcategories/',type:'GET'},
+            showLocationOrder : {url:'locations/order/',type:'GET'},
+            getLocationImages : {url:'locations/images/',type:'GET'},
+            showLocationDeviceOrder : {url:'locations/devices/order/',type:'GET'},
+            getLocationSmartapps : {url:'locations/{id}/smartapps/',type:'GET'},
+            getLocationRoles : {url:'locations/{id}/roles/',type:'GET'},
+            showLocationMode : {url:'locations/{id}/modes/{alt_id}/',type:'GET'},
+            getLocationModes : {url:'locations/{id}/modes/',type:'GET'},
+            sendLocationModeChange : {url:'locations/{id}/modeChanges/{alt_id}/',type:'GET'},
+            postHubClaim : {url:'locations/{id}/hubs/claim/',type:'GET'},
+            getLocationHubs : {url:'locations/{id}/hubs/',type:'GET'},
+            getLocationGroups : {url:'locations/{id}/groups/',type:'GET'},
+            getLocationEvents : {url:'locations/{id}/events/',type:'GET'},
+            getLocationDevices : {url:'locations/{id}/devices/',type:'GET'},
+            showLocation : {url:'locations/{id}/',type:'GET'},
+            getLocations : {url:'locations/',type:'GET'},
+            getHubRoles : {url:'hubs/{id}/roles/',type:'GET'},
+            getHubEvents : {url:'hubs/{id}/events/',type:'GET'},
+            getHubDevices : {url:'hubs/{id}/devices/',type:'GET'},
+            sendHubCommand : {url:'hubs/{id}/command/',type:'GET'},
+            showHub : {url:'hubs/{id}/',type:'GET'},
+            getHubs : {url:'hubs/',type:'GET'},
+            getGroupRoles : {url:'groups/{id}/roles/',type:'GET'},
+            getGroupEvents : {url:'groups/{id}/events/',type:'GET'},
+            showGroupDevice : {url:'groups/{id}/devices/{alt_id}/',type:'GET'},
+            getGroupDevices : {url:'groups/{id}/devices/',type:'GET'},
+            showGroup : {url:'groups/{id}/',type:'GET'},
+            getGroups : {url:'groups/',type:'GET'},
+            showDeviceType : {url:'devicetypes/{id}/',type:'GET'},
+            getDeviceTypes : {url:'devicetypes/',type:'GET'},
+            showDeviceIcon : {url:'devices/icons/{id}/',type:'GET'},
+            getDeviceIcons : {url:'devices/icons/',type:'GET'},
+            showDeviceStateOverride : {url:'devices/{id}/stateOverrides/{alt_id}/',type:'GET'},
+            getDeviceStateOverrides : {url:'devices/{id}/stateOverrides/',type:'GET'},
+            getDeviceRoles : {url:'devices/{id}/roles/',type:'GET'},
+            getDeviceEvents : {url:'devices/{id}/events/',type:'GET'},
+            sendDeviceCommand : {url:'devices/{id}/commands/',type:'GET'},
+            showDevice : {url:'devices/{id}/',type:'GET'},
+            getDevices : {url:'devices/',type:'GET'},
+            showClient : {url:'clients/{id}/',type:'GET'},
+            getRoles : {url:'accounts/{id}/roles/',type:'GET'},
+            showAccount : {url:'accounts/{id}/',type:'GET'},
+            getAccounts : {url:'accounts/',type:'GET'},
+            createAccount : {url:'accounts/',type:'POST'},
+            addDevice : {url:'groups/{id}/devices/',type:'POST'},
+            removeDevice : {url:'groups/{id}/devices/',type:'DELETE'},
+            createGroup : {url:'groups/',type:'POST'},
+            createClient : {url:'clients/',type:'POST'},
+            createHub : {url:'hubs/',type:'POST'},
+            postHubsManufactured : {url:'hubs/manufactured/',type:'POST'},
+            createLocation : {url:'locations/',type:'POST'},
+            createLocationMode : {url:'locations/{id}/modes/',type:'POST'},
+            addLocationSmartApp : {url:'locations/{id}/smartapps/',type:'POST'},
+            installSmartApp : {url:'smartapps/installations/',type:'POST'},
+            createSmartApp : {url:'smartapps/',type:'POST'},
+            createApprovalRequest : {url:'smartapps/approvalrequests/',type:'POST'}
             
-    };    
+    };
+      
+    var log = {
+        info: function(params){
+            if(logLevel == 'info'){
+                Ti.API.info(params);
+            } else if (logLevel == 'debug'){
+                Ti.API.debug(params);
+            }
+        },
+        debug: function(params){
+            if(logLevel == 'info'){
+                Ti.API.info(params);
+            } else if (logLevel == 'debug'){
+                Ti.API.debug(params);
+            }
     
+        },
+        error: function(params){
+            if(logLevel == 'info'){
+                Ti.API.info(params);
+            } else if (logLevel == 'debug'){
+                Ti.API.error(params);
+            }
+            
+        }      
+    };
     var properties = {
         username:null,
-        password:null,
-        logging:true
+        password:null
     };
 
     var getAuth = function(){
@@ -103,44 +129,38 @@ var smartApi = (function() {
         var auth = getAuth();
         
         if(auth){
-            var url = encodeURI(params.url);
+            var url_params = "?"+params.url_params || "";
+            var url = encodeURI(urlRoot + params.url + url_params);
             var body = params.body || null;
             var type = params.type?params.type:"GET";
             var onload = params.onload || null;
             var onerror = params.onerror || null;
             var xhr = Ti.Network.createHTTPClient();
             
-            if(properties.logging){
-                Ti.API.info("SmartThings API: "+url);
-            }
-
             xhr.username = auth.username;
             xhr.password = auth.password;
-       
+            
+            log.debug("SmartThings Request: "+url);
+            
             xhr.onload = function(e) {
-                
-                if (this.status === 200 || this.status === 201) {
-                    if(properties.logging){
-                        Ti.API.info("SmartThings Response: "+this.responseText);
-                    }
-                    onload && onload(JSON.parse(this.responseText));
-
+                e.status = this.status;
+                if (this.status == 200 || this.status == 201) {
+                        onload && onload(JSON.parse(this.responseText));
+                        log.debug("SmartThings Response: "+this.responseText);
+                   
                 } else if(this.status === 204){
-                    if(properties.logging){
-                        Ti.API.info("SmartThings Response: NO CONTENT");
-                    }
+                    log.debug("SmartThings Response: NO CONTENT");
                     onload && onload("No Available Content");
                     
                 } else{
-                    if(properties.logging){
-                        Ti.API.error("SmartThings Error: "+e);
-                    }
+                    log.debug("SmartThings Error: "+this.status+"("+e+")");
                     this.onerror(e);
-
                 }
             };
             
             xhr.onerror = function(e) {
+                log.debug("SmartThings Request Error: "+this.status);
+                e.status = this.status;
                 onerror && onerror(e);
             };
             
@@ -149,11 +169,9 @@ var smartApi = (function() {
             xhr.send(body);
             
         } else {
-            alert("Please Login to SmartThings");
-            return
+            log.error("SmartThings Authorization Required.");
         }
     };
-    
     
     // +-----------------------+
     // | Public members.       |
@@ -162,24 +180,28 @@ var smartApi = (function() {
     /*Admin functions available
     * 
     */
-    var checkAuth = false;
+    publicMethods.checkAuth = false;
     
-    var setLogging = function(params){
-        properties.logging = params;
+    publicMethods.setLogging = function(params){
+        if(params == "debug" || params == "info"){
+            logLevel = params;
+        } else {
+            log.debug("MODULE ti.smart setLogging only accepts 'info' or 'debug' as valid parameters.");
+        }
     };
-    var setAuth = function(params){
+    publicMethods.setAuth = function(params){
         if(params && params!="clear"){
             if(params.username){
                  properties.username = Titanium.Utils.base64encode(params.username);
             }
             if(params.password){
                 properties.password = Titanium.Utils.base64encode(params.password);
-                checkAuth = true;
+                publicMethods.checkAuth = true;
             }
         } else if(params == "clear"){
             properties.username = null;
             properties.password = null;
-            checkAuth = false;
+            publicMethods.checkAuth = false;
         }
     };
           
@@ -194,467 +216,54 @@ var smartApi = (function() {
      *  }
      */
     
-    var getEvents = function(params){
-        if (params && params.id) {
-            params.url = urls.getEvents.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var showSmartappInstallation = function(params){
-        if (params && params.id) {
-            params.url = urls.showSmartappInstallation.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getSmartappInstallations = function(params){
-            params.url = urls.getSmartappInstallations;
-            fetch(params);
-    };
-    var showSmartappEditable = function(params){
-        if (params && params.id) {
-            params.url = urls.showSmartappEditable.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getSmartappEditable = function(params){
-            params.url = urls.getSmartappEditable;
-            fetch(params);
-    };
-    var showSmartappApprovalRequest = function(params){
-        if (params && params.id) {
-            params.url = urls.showSmartappApprovalRequest.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getSmartappApprovalRequests = function(params){
-            params.url = urls.getSmartappApprovalRequests;
-            fetch(params);
-    };
-    var showSmartappVersion = function(params){
-        if (params && params.id && params.versions_id){
-            params.url = urls.showSmartappVersion.replace('{id}',params.id).replace("{alt_id}",params.versions_id);
-            fetch(params);
-        }
-    };
-    var getSmartappVersions = function(params){
-        if (params && params.id) {
-            params.url = urls.getSmartappVersions.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var showSmartapp = function(params){
-        if (params && params.id) {
-            params.url = urls.showSmartapp.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getSmartapps = function(params){
-            params.url = urls.getSmartapps;
-            fetch(params);
-    };
-    var showSmartappCategory = function(params){
-        if (params && params.id) {
-            params.url = urls.showSmartappCategory.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getSmartappCategories = function(params){
-            params.url = urls.getSmartappCategories;
-            fetch(params);
-    };
-    var showLocationOrder = function(params){
-            params.url = urls.showLocationOrder;
-            fetch(params);
-    };
-    var getLocationImages = function(params){
-            params.url = urls.getLocationImages;
-            fetch(params);
-    };
-    var showLocationDeviceOrder = function(params){
-            params.url = urls.showLocationDeviceOrder;
-            fetch(params);
-    };
-    var getLocationSmartapps = function(params){
-        if (params && params.id) {
-            params.url = urls.getLocationSmartapps.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getLocationRoles = function(params){
-        if (params && params.id) {
-            params.url = urls.getLocationRoles.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var showLocationMode = function(params){
-        if (params && params.id && params.mode_id){
-            params.url = urls.showLocationMode.replace('{id}',params.id).replace("{alt_id}", params.mode_id);
-            fetch(params);
-        }
-    };
-    var getLocationModes = function(params){
-        if (params && params.id) {
-            params.url = urls.getLocationModes.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var sendLocationModeChange = function(params){
-        if (params && params.id && params.modeChanges_id){
-            params.url = urls.sendLocationModeChange.replace('{id}',params.id).replace("{alt_id}", params.modeChanges_id);
-            fetch(params);
-        }
-    };
-    var postHubClaim = function(params){
-        if (params && params.id) {
-            params.url = urls.postHubClaim.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getLocationHubs = function(params){
-        if (params && params.id) {
-            params.url = urls.getLocationHubs.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getLocationGroups = function(params){
-        if (params && params.id) {
-            params.url = urls.getLocationGroups.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getLocationEvents = function(params){
-        if (params && params.id) {
-            params.url = urls.getLocationEvents.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getLocationDevices = function(params){
-        if (params && params.id) {
-            params.url = urls.getLocationDevices.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var showLocation = function(params){
-        if (params && params.id) {
-            params.url = urls.showLocation.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getLocations = function(params){
-            params.url = urls.getLocations;
-            fetch(params);
-    };
-    var showHubsManufactured = function(params){
-            params.url = urls.showHubsManufactured;
-            fetch(params);
-    };
-    var getHubRoles = function(params){
-        if (params && params.id) {
-            params.url = urls.getHubRoles.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getHubEvents = function(params){
-        if (params && params.id) {
-            params.url = urls.getHubEvents.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getHubDevices = function(params){
-        if (params && params.id) {
-            params.url = urls.getHubDevices.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var sendHubCommand = function(params){
-        if (params && params.id) {
-            params.url = urls.sendHubCommand.replace('{id}',params.id);
-            params.type = "POST";
-            fetch(params);
-        }
-    };
-    var showHub = function(params){
-        if (params && params.id) {
-            params.url = urls.showHub.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getHubs = function(params){
-            params.url = urls.getHubs;
-            fetch(params);
-    };
-    var getGroupRoles = function(params){
-        if (params && params.id) {
-            params.url = urls.getGroupRoles.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getGroupEvents = function(params){
-        if (params && params.id) {
-            params.url = urls.getGroupEvents.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var showGroupDevice = function(params){
-        if (params && params.id && params.device_id){
-            params.url = urls.showGroupDevice.replace('{id}',params.id).replace("{alt_id}",params.device_id);
-            fetch(params);
-        }
-    };
-    var getGroupDevices = function(params){
-        if (params && params.id) {
-            params.url = urls.getGroupDevices.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var showGroup = function(params){
-        if (params && params.id) {
-            params.url = urls.showGroup.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getGroups = function(params){
-            params.url = urls.getGroups;
-            fetch(params);
-    };
-    var showDeviceType = function(params){
-        if (params && params.id) {
-            params.url = urls.showDeviceType.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getDeviceTypes = function(params){
-            params.url = urls.getDeviceTypes;
-            fetch(params);
-    };
-    var showDeviceIcon = function(params){
-        if (params && params.id) {
-            params.url = urls.showDeviceIcon.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getDeviceIcons = function(params){
-            params.url = urls.getDeviceIcons;
-            fetch(params);
-
-    };
-    var showDeviceStateOverride = function(params){
-        if (params && params.id && params.stateOverrides_id) {
-            params.url = urls.showDeviceStateOverride.replace('{id}',params.id).replace("{alt_id}",params.stateOverrides_id);
-            fetch(params);
-        }
-    };
-    var getDeviceStateOverrides = function(params){
-        if (params && params.id) {
-            params.url = urls.getDeviceStateOverrides.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getDeviceRoles = function(params){
-        if (params && params.id) {
-            params.url = urls.getDeviceRoles.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getDeviceEvents = function(params){
-        if (params && params.id) {
-            params.url = urls.getDeviceEvents.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var sendDeviceCommand = function(params){
-        if (params && params.id) {
-            params.url = urls.sendDeviceCommand.replace('{id}',params.id);
-            params.type = "POST";
-            fetch(params);
-        }
-    };
-    var showDevice = function(params){
-        if (params && params.id) {
-            params.url = urls.showDevice.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getDevices = function(params){
-            params.url = urls.getDevices;
-            fetch(params);
-    };
-    var showClient = function(params){
-        if (params && params.id) {
-            params.url = urls.showClient.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getClients = function(params){
-            params.url = urls.getClients;
-            fetch(params);
-    };
-    var getRoles = function(params){
-        if (params && params.id) {
-            params.url = urls.getRoles.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var showAccount = function(params){
-        if (params && params.id) {
-            params.url = urls.showAccount.replace('{id}',params.id);
-            fetch(params);
-        }
-    };
-    var getAccounts = function(params){
-            params.url = urls.getAccounts;
-            fetch(params);
-    };
+    //Generate public API methods
+    for(var method in API){
+        createMethod(method)
+    }
     
-    var createAccount = function(params){
-            params.url = urls.createAccount;
-            params.type = "POST";
-            fetch(params);
-    };
-    var addDevice = function(params){
-        if (params && params.id) {
-            params.url = urls.addDevice.replace('{id}',params.id);
-            params.type = "POST";
-            fetch(params);
+    function createMethod(_method){
+        if(API[_method].url.indexOf("{id}")!=-1 && API[_method].url.indexOf("{alt_id}")!=-1){
+            
+             publicMethods[_method] = function(params){
+                if (params && params.id && params.alt_id) {
+                    params.url = API[_method].url.replace('{id}',params.id).replace('{alt_id}',params.alt_id);
+                    params.type =API[_method].type;
+                    fetch(params);
+                } else if(params && !params.id){
+                    log.error("MODULE ti.smart: Missing required parameter 'alt_id' for "+_method);
+                } else if(params && !params.alt_id){
+                    log.error("MODULE ti.smart: Missing required parameter 'id' for "+_method);
+                } else {
+                    log.error("MODULE ti.smart: Missing parameters for "+_method);
+                }
+            };
+             
+        } else if (API[_method].url.indexOf("{id}")!=-1){
+             
+             publicMethods[_method] = function(params){
+                if (params && params.id) {
+                    params.url = API[_method].url.replace('{id}',params.id);
+                    params.type =API[_method].type; 
+                    fetch(params);
+                } else if(params && !params.id){
+                    log.error("MODULE ti.smart: Missing required parameter 'id' for "+_method);
+                } else {
+                    log.error("MODULE ti.smart: Missing parameters for "+_method);
+                }
+             };
+             
+        } else {
+             
+             publicMethods[_method] = function(params){
+                params.url = API[_method].url; 
+                params.type =API[_method].type; 
+                fetch(params);
+            };
+             
         }
-    };
-    var removeDevice = function(params){
-        if (params && params.id) {
-            params.url = urls.removeDevice.replace('{id}',params.id);
-            params.type = "DELTE";
-            fetch(params);
-        }
-    };
-    var createGroup = function(params){
-            params.url = urls.createGroup;
-            params.type = "POST";
-            fetch(params);
-    };
-    var createClient = function(params){
-            params.url = urls.createClient;
-            params.type = "POST";
-            fetch(params);
-    }; 
-    var createHub = function(params){
-            params.url = urls.createHub;
-            params.type = "POST";
-            fetch(params);
-    };
-    var postHubsManufactured = function(params){
-            params.url = urls.postHubsManufactured;
-            params.type = "POST";
-            fetch(params);
-    }; 
-    var createLocation = function(params){
-            params.url = urls.createLocation;
-            params.type = "POST";
-            fetch(params);
-    }; 
-    var createLocationMode = function(params){
-        if (params && params.id) {
-            params.url = urls.createLocationMode.replace('{id}',params.id);
-            params.type = "POST";
-            fetch(params);
-        }
-    };
-    var addLocationSmartApp = function(params){
-        if (params && params.id) {
-            params.url = urls.addLocationSmartApp.replace('{id}',params.id);
-            params.type = "POST";
-            fetch(params);
-        }
-    };
-    var installSmartApp = function(params){
-            params.url = urls.installSmartApp;
-            params.type = "POST";
-            fetch(params);
-    }; 
-    var createSmartApp = function(params){
-            params.url = urls.createSmartApp;
-            params.type = "POST";
-            fetch(params);
-    };
-    var createApprovalRequest = function(params){
-            params.url = urls.createApprovalRequest;
-            params.type = "POST";
-            fetch(params);
     };
    
-    return {
-        setLogging : setLogging,
-        checkAuth : checkAuth,
-        setAuth : setAuth,
-        getEvents : getEvents,
-        showSmartappInstallation : showSmartappInstallation,
-        getSmartappInstallations : getSmartappInstallations,
-        showSmartappEditable : showSmartappEditable,
-        getSmartappEditable : getSmartappEditable,
-        showSmartappApprovalRequest : showSmartappApprovalRequest,
-        getSmartappApprovalRequests : getSmartappApprovalRequests,
-        showSmartappVersion : showSmartappVersion,
-        getSmartappVersions : getSmartappVersions,
-        showSmartapp : showSmartapp,
-        getSmartapps : getSmartapps,
-        showSmartappCategory : showSmartappCategory,
-        getSmartappCategories : getSmartappCategories,
-        showLocationOrder : showLocationOrder,
-        getLocationImages : getLocationImages,
-        showLocationDeviceOrder : showLocationDeviceOrder,
-        getLocationSmartapps : getLocationSmartapps,
-        getLocationRoles : getLocationRoles,
-        showLocationMode : showLocationMode,
-        getLocationModes : getLocationModes,
-        sendLocationModeChange : sendLocationModeChange,
-        postHubClaim : postHubClaim,
-        getLocationHubs : getLocationHubs,
-        getLocationGroups : getLocationGroups,
-        getLocationEvents : getLocationEvents,
-        getLocationDevices : getLocationDevices,
-        showLocation : showLocation,
-        getLocations : getLocations,
-        showHubsManufactured : showHubsManufactured,
-        getHubRoles : getHubRoles,
-        getHubEvents : getHubEvents,
-        getHubDevices : getHubDevices,
-        sendHubCommand : sendHubCommand,
-        showHub : showHub,
-        getHubs : getHubs,
-        getGroupRoles : getGroupRoles,
-        getGroupEvents : getGroupEvents,
-        showGroupDevice : showGroupDevice,
-        getGroupDevices : getGroupDevices,
-        showGroup : showGroup,
-        getGroups : getGroups,
-        showDeviceType : showDeviceType,
-        getDeviceTypes : getDeviceTypes,
-        showDeviceIcon : showDeviceIcon,
-        getDeviceIcons : getDeviceIcons,
-        showDeviceStateOverride : showDeviceStateOverride,
-        getDeviceStateOverrides : getDeviceStateOverrides,
-        getDeviceRoles : getDeviceRoles,
-        getDeviceEvents : getDeviceEvents,
-        sendDeviceCommand : sendDeviceCommand,
-        showDevice : showDevice,
-        getDevices : getDevices,
-        showClient : showClient,
-        getClients : getClients,
-        getRoles : getRoles,
-        showAccount : showAccount,
-        getAccounts : getAccounts,
-        createAccount : createAccount,
-        addDevice : addDevice,
-        removeDevice : removeDevice,
-        createGroup : createGroup,
-        createClient : createClient,
-        createHub : createHub,
-        postHubsManufactured : postHubsManufactured,
-        createLocation : createLocation,
-        createLocationMode : createLocationMode,
-        addLocationSmartApp : addLocationSmartApp,
-        installSmartApp : installSmartApp,
-        createSmartApp : createSmartApp,
-        createApprovalRequest : createApprovalRequest
-    };
+    return publicMethods = {};
 })();
 
 module.exports = smartApi;
