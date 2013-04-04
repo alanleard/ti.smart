@@ -1,9 +1,0 @@
-{
-    "description": "SmartThings API Module",
-    "directories": {
-        "lib": "."
-    },
-    "main": "ti.smart",
-    "name": "ti.smart",
-    "version": "1.0"
-}

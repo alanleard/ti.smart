@@ -1,9 +1,0 @@
-{
-    "description": "TeamworkPM API Module",
-    "directories": {
-        "lib": "."
-    },
-    "main": "ti.teamwork",
-    "name": "ti.teamwork",
-    "version": "1.0"
-}
